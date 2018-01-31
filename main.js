@@ -3,6 +3,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        isAll: true,
         list: [
             {
                 id: 1,
@@ -38,11 +39,17 @@ var app = new Vue({
             this.list[index].count ++;
         },
         selAll: function () {   //商品全选
-            let isAll = document.querySelector('#all').checked;
+            let isAll = document.querySelector('#all');
 
-            this.list.forEach(function(item, index) {
-                item.check = !item.check;
-            })  
+            if (isAll.checked == true) {
+                this.list.forEach(function(item, index) {
+                    item.check = true;
+                })  
+            } else {
+                this.list.forEach(function(item, index) {
+                    item.check = false;
+                })  
+            }
         }
     },
     computed: {
