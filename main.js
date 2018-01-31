@@ -1,3 +1,5 @@
+'use strict'
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -26,35 +28,33 @@ var app = new Vue({
         ]
     },
     methods: {
-        remove: function (index) {
+        remove: function (index) {  //移除商品
             this.list.splice(index, 1);
         },
-        reduce: function (index) {
+        reduce: function (index) {  //减少商品
             this.list[index].count --;
         },
-        add: function (index) {
+        add: function (index) { //增加商品
             this.list[index].count ++;
         },
-        selAll: function () {
+        selAll: function () {   //商品全选
             let isAll = document.querySelector('#all').checked;
 
             this.list.forEach(function(item, index) {
-                item.check = !item.check
-            })
-            
+                item.check = !item.check;
+            })  
         }
     },
     computed: {
-        totalPrices: function () {
-            let totalPrices = 0
+        totalPrices: function () {  //计算总价
+            let totalPrices = 0;
 
             this.list.forEach(function (val, index) {
                 if (val.check == true)
                     totalPrices += parseFloat(val.price * val.count);
             })
 
-            return totalPrices.toString().replace(/\B(?=(\d{3})+$)/g, ',');
+            return totalPrices.toString().replace(/\B(?=(\d{3})+$)/g, ','); //每三位数中间加一个‘，’
         }
     }
-
 })
